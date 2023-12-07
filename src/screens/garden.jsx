@@ -3,7 +3,7 @@ import Modal from '../components/modal'
 
 const Garden = ({ setCurrentScreenName, screenNames }) => {
 
-    const [ isModalOpen, setIsModalOpen ] = useState(false)
+    const [ isModalOpen, setIsModalOpen ] = useState(true)
 
     const addButtonStyle = {
         position: 'absolute',

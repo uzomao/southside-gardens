@@ -17,7 +17,7 @@ const App = () => {
     garden,
   }
 
-  const [currentScreenName, setCurrentScreenName] = useState(screenNames.start)
+  const [currentScreenName, setCurrentScreenName] = useState(screenNames.garden)
 
   const screenComponents = {
     start: <Start setCurrentScreenName={setCurrentScreenName} screenNames={screenNames} />,

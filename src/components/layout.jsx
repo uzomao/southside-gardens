@@ -3,7 +3,7 @@ import Clouds from './clouds'
 
 const Layout = ({ children }) => {
   return (
-    <div>
+    <div style={{position: 'fixed', width: '100%'}}>
       <div id='sky'>
         <Clouds numClouds={3} />
       </div>
