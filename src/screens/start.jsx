@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Start = () => {
+const Start = ({ setCurrentScreenName, screenNames }) => {
   const styles = {
     position: 'absolute',
     display: 'flex',
@@ -24,9 +24,9 @@ const Start = () => {
   
   return (
     <div style={styles}>
-      <h1>Welcome to the Garden</h1>
+      <h1>Welcome</h1>
       <div style={{buttonContainer}}>
-        <button style={buttonStyle}>Create a new garden</button>
+        <button style={buttonStyle} onClick={() => setCurrentScreenName(screenNames.garden)}>Create a new garden</button>
         <button style={buttonStyle}>Explore other gardens</button>
       </div>
     </div>

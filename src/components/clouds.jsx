@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from '../styles/clouds.module.css'
 
-const cloudTopPositions = [10,20,30,40,50,60,70]
+const cloudTopPositions = [0,10,20,30]
 
 export default function Clouds ({ numClouds }) {
 
@@ -10,7 +10,7 @@ export default function Clouds ({ numClouds }) {
     for(let i = 0; i < numClouds; i++){
         clouds.push(<div className={styles.cloud} key={i} style={{
             animationDelay: `${i*10}s`,
-            top: `${cloudTopPositions[Math.floor(Math.random()*cloudTopPositions.length)]}px`
+            // top: `${cloudTopPositions[Math.floor(Math.random()*cloudTopPositions.length)]}px`
           }}></div>)
     }
 
