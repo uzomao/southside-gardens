@@ -6,6 +6,7 @@ const Garden = ({ setCurrentScreenName, screenNames }) => {
 
     const [ isModalOpen, setIsModalOpen ] = useState(true)
     const [ gardenImages, setGardenImages ] = useState([])
+    const [ foregroundZIndex, setForegroundZIndex ] = useState(0)
 
     const addButtonStyle = {
         position: 'fixed',
@@ -18,11 +19,17 @@ const Garden = ({ setCurrentScreenName, screenNames }) => {
         position: 'absolute',
         top: '40%',
         left: '40%',
-        maxWidth: '200px'
+        maxWidth: '200px',
+        // boxShadow: `0px 20px 4px rgba(0,0,0,0.25)`
     }
 
     const addImageToGarden = (image) => {
         setGardenImages([...gardenImages, image])
+    }
+
+    const foregroundImage = (e) => {
+        setForegroundZIndex(foregroundZIndex + 1)
+        e.target.style.zIndex = foregroundZIndex;
     }
 
   return (
@@ -34,7 +41,7 @@ const Garden = ({ setCurrentScreenName, screenNames }) => {
         { isModalOpen && <Modal setIsModalOpen={setIsModalOpen} addImageToGarden={addImageToGarden} /> }
 
         {
-            gardenImages.map((image) => <Draggable><img style={imageStyle} src={image} alt='' /></Draggable>)
+            gardenImages.map((imageUrl) => <Draggable onStart={(event) => foregroundImage(event)}><img style={imageStyle} src={imageUrl} alt='' /></Draggable>)
         }
     </div>
   )

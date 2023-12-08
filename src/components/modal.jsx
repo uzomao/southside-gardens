@@ -1,5 +1,5 @@
 import React from 'react'
-import { images } from '../utils/default-images'
+import { images } from '../data/images'
 
 const Modal = ({ setIsModalOpen, addImageToGarden }) => {
 
@@ -40,8 +40,8 @@ const Modal = ({ setIsModalOpen, addImageToGarden }) => {
             </button>
             <div style={imagesContainer}>
                 {
-                    images.map((imageUrl) => 
-                        <div style={{width: '40%', padding: '2.5%'}}>
+                    images.map((imageUrl, index) => 
+                        <div style={{width: '40%', padding: '2.5%'}} key={index}>
                             <img 
                                 style={{maxWidth: '100%', cursor: 'pointer'}} 
                                 src={imageUrl} 
