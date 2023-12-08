@@ -13,6 +13,7 @@ const Garden = ({ setCurrentScreenName, screenNames }) => {
         bottom: '15px',
         right: '15px',
         fontSize: '24px',
+        zIndex: 99
     }
 
     const imageStyle = {
