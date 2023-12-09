@@ -20,7 +20,7 @@ const App = () => {
     garden,
   }
 
-  const [currentScreenName, setCurrentScreenName] = useState(screenNames.garden)
+  const [currentScreenName, setCurrentScreenName] = useState(screenNames.intro)
   const [ visitorDetails, setVisitorDetails ] = useState([])
 
   const currentVisitor = {
