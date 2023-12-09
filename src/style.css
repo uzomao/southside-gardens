@@ -34,3 +34,12 @@ button {
     color: white;
     cursor: pointer;
 }
+
+.drag-active{
+    border: 1px dashed #fff;
+}
+
+span.drag-active {
+    display: flex !important;
+    border: none
+}

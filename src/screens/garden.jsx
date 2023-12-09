@@ -23,6 +23,7 @@ const Garden = ({ setCurrentScreenName, screenNames }) => {
         maxWidth: '200px',
         resize: 'both',
         overflow: 'hidden',
+        cursor: 'pointer'
         // boxShadow: `0px 20px 4px rgba(0,0,0,0.25)`
     }
 
@@ -31,13 +32,40 @@ const Garden = ({ setCurrentScreenName, screenNames }) => {
         height: '100%'
     }
 
+    const deleteBtnStyle = {
+        background: 'red',
+        color: 'white',
+        textAlign: 'center',
+        display: 'none',
+        borderRadius: '100%',
+        width: '10px', height: '10px', padding: '5px',
+        justifyContent: 'center', alignItems: 'center',
+        position: 'absolute', top: 0, right: 0,
+        border: `none !important`,
+        cursor: 'pointer',
+        zIndex: 98
+    }
+
     const addImageToGarden = (image) => {
         setGardenImages([...gardenImages, image])
     }
 
-    const foregroundImage = (e) => {
+    const removeImageFromGarden = (imageUrl) => {
+        console.log('delete clicked')
+        gardenImages.splice(gardenImages.indexOf(imageUrl), 1)
+    }
+
+    const setActiveImage = (e, index) => {
+        // Place the image in the foreground
         setForegroundZIndex(foregroundZIndex + 1)
-        e.target.style.zIndex = foregroundZIndex;
+        e.target.parentElement.style.zIndex = foregroundZIndex;
+        
+        // Disable any currently active image
+        Array.from(document.getElementsByClassName('drag-active')).forEach((elem) => elem.className = '')
+
+        // Set the current image to be acitve
+        e.target.className = 'drag-active'
+        document.getElementById(`delete-btn-${index}`).className = 'drag-active'
     }
 
   return (
@@ -49,10 +77,17 @@ const Garden = ({ setCurrentScreenName, screenNames }) => {
         { isModalOpen && <Modal setIsModalOpen={setIsModalOpen} addImageToGarden={addImageToGarden} /> }
 
         {
-            gardenImages.map((imageUrl) => 
-                <Draggable onStart={(event) => foregroundImage(event)}>
+            gardenImages.map((imageUrl, index) => 
+                <Draggable onStart={(event) => setActiveImage(event, index)}>
                     <div style={imageContainerStyle}>
                         <img style={imageStyle} src={imageUrl} alt='' />
+                        <span 
+                            style={deleteBtnStyle} 
+                            id={`delete-btn-${index}`}
+                            onClick={() => removeImageFromGarden(imageUrl)}
+                        >
+                            x
+                        </span>
                     </div>
                 </Draggable>
         )}
