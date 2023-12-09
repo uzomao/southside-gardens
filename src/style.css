@@ -1,6 +1,7 @@
 :root {
     --sky: #87C1E9;
     --grass: #89BA38;
+    --modal-bg: rgba(255, 255, 255, 0.975);
 }
 
 body {

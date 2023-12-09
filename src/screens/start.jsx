@@ -26,7 +26,7 @@ const Start = ({ setCurrentScreenName, screenNames }) => {
     <div style={styles}>
       <h1>Welcome</h1>
       <div style={{buttonContainer}}>
-        <button style={buttonStyle} onClick={() => setCurrentScreenName(screenNames.garden)}>Create a new garden</button>
+        <button style={buttonStyle} onClick={() => setCurrentScreenName(screenNames.intro)}>Create a new garden</button>
         <button style={buttonStyle}>Explore other gardens</button>
       </div>
     </div>
