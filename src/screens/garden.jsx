@@ -1,19 +1,23 @@
 import React, { useState } from 'react'
 import Modal from '../components/modal'
 import Draggable from 'react-draggable'
+import html2canvas from 'html2canvas'
 
 const Garden = ({ setCurrentScreenName, screenNames }) => {
 
-    const [ isModalOpen, setIsModalOpen ] = useState(true)
+    const [ isModalOpen, setIsModalOpen ] = useState(false)
     const [ gardenImages, setGardenImages ] = useState([])
     const [ foregroundZIndex, setForegroundZIndex ] = useState(0)
 
-    const addButtonStyle = {
+    const buttonsContainer = {
         position: 'fixed',
         bottom: '15px',
         right: '15px',
         fontSize: '24px',
-        zIndex: 99
+        zIndex: 99,
+        display: 'flex',
+        justifyContent: 'space-between',
+        width: '10%'
     }
 
     const imageContainerStyle = {
@@ -55,6 +59,17 @@ const Garden = ({ setCurrentScreenName, screenNames }) => {
         gardenImages.splice(gardenImages.indexOf(imageUrl), 1)
     }
 
+    const saveGarden = () => {
+        document.getElementById('buttons-container').style.display = 'none'
+
+        const element = document.getElementById('main-container');
+
+        html2canvas(element).then(canvas => {
+            const imgData = canvas.toDataURL('image/png');
+            console.log(imgData)
+        })
+    }
+
     const setActiveImage = (e, index) => {
         // Place the image in the foreground
         setForegroundZIndex(foregroundZIndex + 1)
@@ -69,29 +84,35 @@ const Garden = ({ setCurrentScreenName, screenNames }) => {
     }
 
   return (
-    <div>
-        <button style={addButtonStyle} onClick={() => setIsModalOpen(true)}>
-            <span role='img' aria-label='plus sign emoji'>➕</span>
-        </button>
+    <>
+        <div>
+            { isModalOpen && <Modal setIsModalOpen={setIsModalOpen} addImageToGarden={addImageToGarden} /> }
 
-        { isModalOpen && <Modal setIsModalOpen={setIsModalOpen} addImageToGarden={addImageToGarden} /> }
-
-        {
-            gardenImages.map((imageUrl, index) => 
-                <Draggable onStart={(event) => setActiveImage(event, index)}>
-                    <div style={imageContainerStyle}>
-                        <img style={imageStyle} src={imageUrl} alt='' />
-                        <span 
-                            style={deleteBtnStyle} 
-                            id={`delete-btn-${index}`}
-                            onClick={() => removeImageFromGarden(imageUrl)}
-                        >
-                            x
-                        </span>
-                    </div>
-                </Draggable>
-        )}
-    </div>
+            {
+                gardenImages.map((imageUrl, index) => 
+                    <Draggable onStart={(event) => setActiveImage(event, index)}>
+                        <div style={imageContainerStyle}>
+                            <img style={imageStyle} src={imageUrl} alt='' />
+                            <span 
+                                style={deleteBtnStyle} 
+                                id={`delete-btn-${index}`}
+                                onClick={() => removeImageFromGarden(imageUrl)}
+                            >
+                                x
+                            </span>
+                        </div>
+                    </Draggable>
+            )}
+        </div>
+        <div style={buttonsContainer} id='buttons-container'>
+            <button onClick={() => setIsModalOpen(true)}>
+                <span role='img' aria-label='plus sign emoji'>➕</span>
+            </button>
+            <button onClick={() => saveGarden()}>
+                💾
+            </button>
+        </div>
+    </>
   )
 }
 
