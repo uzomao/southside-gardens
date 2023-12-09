@@ -20,13 +20,18 @@ const App = () => {
     garden,
   }
 
-  const [currentScreenName, setCurrentScreenName] = useState(screenNames.intro)
+  const [currentScreenName, setCurrentScreenName] = useState(screenNames.garden)
   const [ visitorDetails, setVisitorDetails ] = useState([])
+
+  const currentVisitor = {
+    name: visitorDetails[0],
+    garden: visitorDetails[1]
+  }
 
   const screenComponents = {
     start: <Start setCurrentScreenName={setCurrentScreenName} screenNames={screenNames} />,
     intro: <Intro setCurrentScreenName={setCurrentScreenName} screenNames={screenNames} setVisitorDetails={setVisitorDetails} />,
-    garden: <Garden setCurrentScreenName={setCurrentScreenName} screenNames={screenNames} />
+    garden: <Garden setCurrentScreenName={setCurrentScreenName} screenNames={screenNames} currentVisitor={currentVisitor} />
   }
 
   return (
