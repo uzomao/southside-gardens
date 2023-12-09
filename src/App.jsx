@@ -30,7 +30,7 @@ const App = () => {
   }
 
   return (
-    <Layout>
+    <Layout showSky={currentScreenName !== garden}>
       <div style={currentScreenName === start ? { position: 'absolute', width: '100%'} : {}}>
         { screenComponents[currentScreenName] }
       </div>

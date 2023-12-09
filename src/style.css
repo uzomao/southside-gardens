@@ -26,6 +26,10 @@ body {
     min-height: 65vh;
 }
 
+.is-garden-screen {
+    min-height: 100vh !important;
+}
+
 button {
     background-color: var(--sky);
     border: 1px solid pink;
@@ -43,4 +47,9 @@ button {
 span.drag-active {
     display: flex !important;
     border: none
+}
+
+.higher-display {
+    position: absolute;
+    z-index: 10;
 }
